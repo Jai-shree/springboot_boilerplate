@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
+import com.sample.springboot_boilerplate.service.OrganizationService;
 
 import java.util.List;
 
@@ -29,5 +30,14 @@ public class OrgHandler {
 
         Query nativeQuery = entityManager.createNativeQuery(query.toString());
         return nativeQuery.setParameter("id", id).getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> getEmployeeList(Integer id){
+        StringBuilder query = new StringBuilder();
+        query.append("select id,employee_name from employee where org_id = :id");
+
+        Query nativeQuery = entityManager.createNativeQuery(query.toString());
+        return nativeQuery.setParameter("id",id).getResultList();
     }
 }

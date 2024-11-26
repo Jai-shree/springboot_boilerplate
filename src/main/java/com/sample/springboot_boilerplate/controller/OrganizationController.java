@@ -2,6 +2,7 @@ package com.sample.springboot_boilerplate.controller;
 
 import com.sample.springboot_boilerplate.dto.OrganizationDTO;
 import com.sample.springboot_boilerplate.dto.ProductDTO;
+import com.sample.springboot_boilerplate.dto.EmployeeDTO;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.sample.springboot_boilerplate.exception.ResourceNotFoundException;
 import com.sample.springboot_boilerplate.service.OrganizationService;
@@ -44,5 +45,12 @@ public class OrganizationController {
             // Send a default 404 Not Found response
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @GetMapping("/{id}/employee/list")
+    public ResponseEntity<List<EmployeeDTO>> getEmployeeList(@PathVariable("id") Integer id){
+        List<EmployeeDTO> employees;
+        employees = organizationService.getEmployeeList(id);
+        return ResponseEntity.ok(employees);
     }
 }

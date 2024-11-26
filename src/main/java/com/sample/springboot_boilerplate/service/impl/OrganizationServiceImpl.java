@@ -1,6 +1,7 @@
 package com.sample.springboot_boilerplate.service.impl;
 
 import com.sample.springboot_boilerplate.Db.OrgHandler;
+import com.sample.springboot_boilerplate.dto.EmployeeDTO;
 import com.sample.springboot_boilerplate.dto.OrganizationDTO;
 import com.sample.springboot_boilerplate.dto.ProductDTO;
 import com.sample.springboot_boilerplate.entity.Organization;
@@ -50,6 +51,21 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
 
         return products;
+    }
+
+    public List<EmployeeDTO> getEmployeeList(Integer id) {
+        List<Object[]> org1 = orgHandler.getEmployeeList(id);
+        List<EmployeeDTO> employees = new ArrayList<>();
+
+        for  (Object[] org : org1) {
+            EmployeeDTO dto = new EmployeeDTO();
+            dto.setId(Integer.parseInt(Objects.toString(org[0])));
+            dto.setEmployee_name((String) org[1]);
+
+            employees.add(dto);
+        }
+
+        return employees;
     }
 
     @Override
