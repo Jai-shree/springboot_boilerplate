@@ -53,4 +53,11 @@ public class OrganizationController {
         employees = organizationService.getEmployeeList(id);
         return ResponseEntity.ok(employees);
     }
+
+    @GetMapping("/{id}/employee/{empEmail}/reports")
+    public ResponseEntity<List<EmployeeDTO>> getManagersEmployeeList(@PathVariable Integer id , @PathVariable String empEmail){
+        List<EmployeeDTO> ManagersEmployees;
+        ManagersEmployees = organizationService.getManagersEmployeeList(id,empEmail);
+        return ResponseEntity.ok(ManagersEmployees);
+    }
 }

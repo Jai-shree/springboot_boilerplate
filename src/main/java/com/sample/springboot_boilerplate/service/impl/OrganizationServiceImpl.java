@@ -37,6 +37,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     public List<ProductDTO> getProductList(Integer id) {
         List<Object[]> orgs = orgHandler.getProductList(id);
@@ -52,7 +53,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         return products;
     }
-
+    @Override
     public List<EmployeeDTO> getEmployeeList(Integer id) {
         List<Object[]> org1 = orgHandler.getEmployeeList(id);
         List<EmployeeDTO> employees = new ArrayList<>();
@@ -66,6 +67,21 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
 
         return employees;
+    }
+    @Override
+    public List<EmployeeDTO> getManagersEmployeeList(Integer id, String empEmail) {
+        List<Object[]> org2 = orgHandler.getManagerEmployeeList(id,empEmail);
+        List<EmployeeDTO> employee = new ArrayList<>();
+
+        for  (Object[] org : org2) {
+            EmployeeDTO dto = new EmployeeDTO();
+            dto.setId(Integer.parseInt(Objects.toString(org[0])));
+            dto.setEmployee_name((String) org[1]);
+
+            employee.add(dto);
+        }
+
+        return employee;
     }
 
     @Override

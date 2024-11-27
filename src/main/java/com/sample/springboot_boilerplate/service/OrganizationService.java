@@ -13,5 +13,7 @@ public interface OrganizationService {
     List<ProductDTO> getProductList(Integer id);
 
     List<EmployeeDTO> getEmployeeList(Integer id);
+
+    List<EmployeeDTO> getManagersEmployeeList(Integer id, String empEmail);
 }
 
