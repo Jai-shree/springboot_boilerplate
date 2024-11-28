@@ -60,4 +60,5 @@ public class OrganizationController {
         ManagersEmployees = organizationService.getManagersEmployeeList(id,empEmail);
         return ResponseEntity.ok(ManagersEmployees);
     }
+    
 }
