@@ -10,6 +10,12 @@ import com.sample.springboot_boilerplate.repository.OrganizationRepository;
 import com.sample.springboot_boilerplate.service.OrganizationService;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,5 +64,5 @@ public class OrganizationServiceImpl implements OrganizationService {
                 .orElseThrow(() -> new ResourceNotFoundException("Organization not found with ID: " + id));
 
         return organizationMapper.toDTO(organization);
-    }
+    }   
 }
