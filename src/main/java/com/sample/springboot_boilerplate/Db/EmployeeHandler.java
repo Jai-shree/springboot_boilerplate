@@ -8,28 +8,20 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class OrgHandler {
+public class EmployeeHandler {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> listAllOrgs() {
+    public List<Object[]> getMeetingNotes(Integer id,String managerEmail, String empEmail){
         StringBuilder query = new StringBuilder();
-        query.append("select * from t_organization ");
-
+        query.append("select id,emp_email,manager_email,meeting_notes,authored_by,meeting_mode,meeting_date from meeting_notes where org_id=:id and manager_email= :managerEmail and emp_email = :empEmail and authored_by = :managerEmail");
         Query nativeQuery = entityManager.createNativeQuery(query.toString());
+        nativeQuery.setParameter("id",id);
+        nativeQuery.setParameter("empEmail", empEmail);
+        nativeQuery.setParameter("managerEmail",managerEmail);
         return nativeQuery.getResultList();
     }
-
-    @SuppressWarnings("unchecked")
-    public List<Object[]> getProductList(Integer id) {
-        StringBuilder query = new StringBuilder();
-        query.append("select id, product_name from t_product where org_id = :id ");
-
-        Query nativeQuery = entityManager.createNativeQuery(query.toString());
-        return nativeQuery.setParameter("id", id).getResultList();
-    }
-
 }
 

@@ -6,9 +6,7 @@ import com.sample.springboot_boilerplate.dto.MeetingNotesDTO;
 
 import java.util.List;
 
-public interface OrganizationService {
-    List<OrganizationDTO> getAllOrganizations();
-    OrganizationDTO getOrganizationById(Integer id);
-    List<ProductDTO> getProductList(Integer id);
+public interface EmployeeService {
+    List<MeetingNotesDTO> getMeetingNotes(Integer id, String managerEmail,String empEmail);
 }
 
