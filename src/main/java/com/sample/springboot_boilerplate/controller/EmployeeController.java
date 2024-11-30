@@ -3,6 +3,7 @@ package com.sample.springboot_boilerplate.controller;
 import com.sample.springboot_boilerplate.dto.OrganizationDTO;
 import com.sample.springboot_boilerplate.dto.ProductDTO;
 import com.sample.springboot_boilerplate.dto.MeetingNotesDTO;
+import com.sample.springboot_boilerplate.dto.FeedbackDTO;
 import com.sample.springboot_boilerplate.exception.ResourceNotFoundException;
 import com.sample.springboot_boilerplate.service.EmployeeService;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
+import java.util.Date;
 
 
 
@@ -35,4 +37,11 @@ public class EmployeeController{
         List<MeetingNotesDTO> notes = employeeService.getMeetingNotes(id,managerEmail,empEmail);
         return ResponseEntity.ok(notes);
     }
+
+    @PostMapping("/{org_id}/{empEmail}/enterFeedback")
+    public ResponseEntity<?> employeeEnterNotes(@PathVariable("org_id") Integer org_id, @PathVariable("empEmail") String empEmail, @RequestBody FeedbackDTO feedback){
+        employeeService.addNewMeetingRecord(org_id, empEmail, feedback.getReporteeEmail(), feedback.getMeetingDate(), feedback.getMode(), feedback.getFeedbackEntered());
+        return ResponseEntity.status(200).body("Notes added successfully.");
+    }
+
 }
